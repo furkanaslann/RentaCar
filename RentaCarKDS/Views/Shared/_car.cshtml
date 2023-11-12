@@ -1,0 +1,13 @@
+﻿@model Car
+<!-- foreach bölümündeki 'cars' verisini direkt olarak aktaramadığımız için bu sayfada tekrar 'Car' sınıfını tanımlayarak 
+
+modelle tanımlıyoruz.-->
+<tr>
+    <td>@Model.Id</td>
+    <td>@Model.StartDate</td>
+    <td>@Model.FinishDate</td>
+    <td>@Model.ChassisNo</td>
+    <td>@Model.Plate</td>
+    <td>@Model.Type</td>
+    <td>@Model.Price ₺</td>
+</tr>

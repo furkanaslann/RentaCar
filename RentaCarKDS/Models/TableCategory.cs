@@ -2,7 +2,7 @@
 
 namespace RentaCarKDS.Models
 {
-    public class Category
+    public class TableCategory
     {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>@ViewData["Title"] -Kantar Sistemi</title>
+    <title>@ViewData["Title"] - Kantar Sistemi</title>
 
     <!-- Fontfaces CSS-->
     <link href="~/CoolAdmin-master/css/font-face.css" rel="stylesheet" media="all">
@@ -37,13 +37,17 @@
 </head>
 
 <body class="animsition">
+    @RenderSection("SuccessMessageBox", false)
+    <div class="alert alert-success" role="alert">
+        This is a success alert—check it out!
+    </div>
     <div class="page-wrapper">
-        @await Html.PartialAsync("_menuside2.cshtml")
+        @await Html.PartialAsync("_menuside2")
         <!-- END MENU SIDEBAR-->
         <!-- PAGE CONTAINER-->
         <div class="page-container2">
             <!-- HEADER DESKTOP-->
-            @await Html.PartialAsync("_pageheader2.cshtml")
+            @await Html.PartialAsync("_pageheader2")
             <!-- END HEADER DESKTOP-->
             <!-- BREADCRUMB (Main)-->
             <section id="render-body-2">@RenderBody()</section>            

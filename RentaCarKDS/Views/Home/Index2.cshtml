@@ -9,26 +9,23 @@
         <div class="container-fluid">
             <div class="col-xl-auto">
                 <div class="table-responsive table--no-card m-b-30">
+                    @section SuccessMessageBox
+                    {
+                        <div class="alert alert-success" role="alert" style="text-align: center">
+                            Giriş başarılı!
+                        </div>
+                    }
                     @if (Model.Car.Count == 0)
                     {
-                        // Ürün yok.
-                        <div class="alert alert-danger" role="alert">
-                            <h4 class="alert-heading">Well done!</h4>
-                            <p>
-                                Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so
-                                that you can see how spacing within an alert works with this kind of content.
-                            </p>
-                            <hr>
-                            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-                        </div>
+                        @await Html.PartialAsync("_nocar")
                     }
                     else
                     {
-                        // Ürün var.
+                        // Araç var.
                         <table class="table table-borderless table-striped table-earning">
                             <thead>
                                 <tr>
-                                    @foreach (var category in Model.Category)
+                                    @foreach (var category in Model.TableCategory)
                                     {
                                         <th>@category.Name</th>
                                     }
@@ -37,88 +34,8 @@
                             <tbody>
                                 @foreach (var cars in Model.Car)
                                 {
-                                    <tr>
-                                        <td>@cars.Id</td>
-                                        <td>@cars.StartDate</td>
-                                        <td>@cars.FinishDate</td>
-                                        <td>@cars.ChassisNo</td>
-                                        <td>@cars.Plate</td>
-                                        <td>@cars.Type</td>
-                                        <td>@cars.Price</td>
-                                    </tr>
+                                    @await Html.PartialAsync("_car", cars)
                                 }
-                                <tr>
-                                    <td>100398</td>
-                                    <td>2018-09-10 05:57</td>
-                                    <td>2018-09-15 05:50</td>
-                                    <td class="table-text-center">13 AL 001</td>
-                                    <td class="table-text-center">S123EGE114AF</td>
-                                    <td>Economic</td>
-                                    <td>1.230₺</td>
-                                </tr>
-                                <tr>
-                                    <td>101248</td>
-                                    <td>2023-05-30 12:00</td>
-                                    <td>2023-06-10 12:50</td>
-                                    <td class="table-text-center">39 HGS 144</td>
-                                    <td class="table-text-center">ASD515633VBN</td>
-                                    <td>Premium</td>
-                                    <td>7.879₺</td>
-                                </tr>
-                                <tr>
-                                    <td>105791</td>
-                                    <td>2023-10-20 10:32</td>
-                                    <td>2023-10-30 12:20</td>
-                                    <td class="table-text-center">34 DZN 3941</td>
-                                    <td class="table-text-center">68FA6EG34XCV</td>
-                                    <td>Standard</td>
-                                    <td>5.415₺</td>
-                                </tr>
-                                <tr>
-                                    <td>2018-09-26 23:06</td>
-                                    <td>100395</td>
-                                    <td>iPhone X 256Gb Black</td>
-                                    <td class="text-right">$1199.00</td>
-                                    <td class="text-right"><span class="status--denied">Denied</span></td>
-                                    <td class="text-right">$1199.00</td>
-                                    <td>5.415₺</td>
-                                </tr>
-                                <tr>
-                                    <td>2018-09-25 19:03</td>
-                                    <td>100393</td>
-                                    <td>USB 3.0 Cable</td>
-                                    <td class="text-right">$10.00</td>
-                                    <td class="text-right"><span class="status--denied">Denied</span></td>
-                                    <td class="text-right">$30.00</td>
-                                    <td>5.415₺</td>
-                                </tr>
-                                <tr>
-                                    <td>2018-09-29 05:57</td>
-                                    <td>100392</td>
-                                    <td>Smartwatch 4.0 LTE Wifi</td>
-                                    <td class="text-right">$199.00</td>
-                                    <td class="text-right"><span class="status--denied">Denied</span></td>
-                                    <td class="text-right">$1494.00</td>
-                                    <td>5.415₺</td>
-                                </tr>
-                                <tr>
-                                    <td>2018-09-24 19:10</td>
-                                    <td>100391</td>
-                                    <td>Camera C430W 4k</td>
-                                    <td class="text-right">$699.00</td>
-                                    <td class="text-right">1</td>
-                                    <td class="text-right">$699.00</td>
-                                    <td>5.415₺</td>
-                                </tr>
-                                <tr>
-                                    <td>2018-09-22 00:43</td>
-                                    <td>100393</td>
-                                    <td>USB 3.0 Cable</td>
-                                    <td class="text-right">$10.00</td>
-                                    <td class="text-right">3</td>
-                                    <td class="text-right">$30.00</td>
-                                    <td>5.415₺</td>
-                                </tr>
                             </tbody>
                         </table>
                     }

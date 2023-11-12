@@ -24,18 +24,20 @@
                     </a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a asp-controller="Home" asp-action="Index">
-                                <i class="fas fa-tachometer-alt"></i>Ana Sayfa
-                            </a>
+                            <a asp-controller="Home" asp-action="Index">Ana Sayfa</a>
                         </li>
                         <li>
-                            <a asp-controller="Home" asp-action="Index2">
-                                <i class="fas fa-tachometer-alt"></i>Admin Paneli
-                            </a>
+                            <a asp-controller="Home" asp-action="Index2">Tablo</a>
                         </li>
                         <li>
                             <a asp-controller="Admin" asp-action="Details">Detaylar</a>
                         </li>
+                        @* @foreach (var category in Model.TableCategory)
+                        {
+                            <li>
+                                @await Html.PartialAsync("_tablecategory.cshtml")
+                            </li>
+                        } *@
                     </ul>
                 </li>
                 <li class="has-sub">
