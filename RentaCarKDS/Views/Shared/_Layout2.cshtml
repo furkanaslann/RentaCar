@@ -37,25 +37,21 @@
 </head>
 
 <body class="animsition">
-    @RenderSection("SuccessMessageBox", false)
-    <div class="alert alert-success" role="alert">
-        This is a success alert—check it out!
-    </div>
     <div class="page-wrapper">
         @await Html.PartialAsync("_menuside2")
         <!-- END MENU SIDEBAR-->
         <!-- PAGE CONTAINER-->
         <div class="page-container2">
             <!-- HEADER DESKTOP-->
+            @RenderSection("SuccessMessageBox", false)
             @await Html.PartialAsync("_pageheader2")
             <!-- END HEADER DESKTOP-->
             <!-- BREADCRUMB (Main)-->
-            <section id="render-body-2">@RenderBody()</section>            
+            <section id="render-body-2">@RenderBody()</section>
             <!-- END PAGE CONTAINER-->
         </div>
 
     </div>
-
     <!-- Jquery JS-->
     <script src="~/CoolAdmin-master/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
