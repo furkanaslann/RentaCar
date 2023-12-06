@@ -13,7 +13,7 @@ namespace RentaCarKDS.Models
         }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Car> Cars { get; set; }
-        public DbSet<TableCategory> TableCategorys { get; set; }
+        public DbSet<TableCategory> TableCategories { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

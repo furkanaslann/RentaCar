@@ -116,16 +116,17 @@
                             <span class="au-breadcrumb-span">You are here:</span>
                             <ul class="list-unstyled list-inline au-breadcrumb__list">
                                 <li class="list-inline-item active">
-                                    <a href="#">Home</a>
+                                    <a asp-controller="Home" asp-action="Index">Ana Sayfa</a>
                                 </li>
                                 <li class="list-inline-item seprate">
                                     <span>/</span>
                                 </li>
-                                <li class="list-inline-item">Dashboard</li>
+                                <li class="list-inline-item active">
+                                    <a asp-controller="Admin" asp-action="Details">Detaylar</a>
                             </ul>
                         </div>
-                        <button class="au-btn au-btn-icon au-btn--green">
-                            <i class="zmdi zmdi-plus"></i>add item
+                        <button class="au-btn au-btn-icon au-btn--green" href="#">
+                            <i class="zmdi zmdi-plus"></i>Araba Ekle
                         </button>
                     </div>
                 </div>
