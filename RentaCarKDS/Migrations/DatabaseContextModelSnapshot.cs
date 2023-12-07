@@ -39,7 +39,8 @@ namespace RentaCarKDS.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -60,7 +61,18 @@ namespace RentaCarKDS.Migrations
 
                     b.Property<string>("ChassisNo")
                         .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<double>("DatePrice")
+                        .HasColumnType("float");
+
+                    b.Property<string>("DepartmentCity")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("FinishDate")
                         .IsRequired()
@@ -68,10 +80,8 @@ namespace RentaCarKDS.Migrations
 
                     b.Property<string>("Plate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("StartDate")
                         .IsRequired()
@@ -83,16 +93,22 @@ namespace RentaCarKDS.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartmentId");
+
                     b.ToTable("Cars");
                 });
 
-            modelBuilder.Entity("RentaCarKDS.Models.TableCategory", b =>
+            modelBuilder.Entity("RentaCarKDS.Models.Department", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -102,9 +118,12 @@ namespace RentaCarKDS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Region")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("TableCategorys");
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("RentaCarKDS.Models.User", b =>
@@ -134,6 +153,17 @@ namespace RentaCarKDS.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("RentaCarKDS.Models.Car", b =>
+                {
+                    b.HasOne("RentaCarKDS.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,7 +5,7 @@
 namespace RentaCarKDS.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace RentaCarKDS.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,35 +27,19 @@ namespace RentaCarKDS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cars",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StartDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FinishDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ChassisNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Plate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cars", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TableCategorys",
+                name: "Departments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TableCategorys", x => x.Id);
+                    table.PrimaryKey("PK_Departments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,6 +57,37 @@ namespace RentaCarKDS.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Cars",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StartDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FinishDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ChassisNo = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
+                    Plate = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DatePrice = table.Column<double>(type: "float", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
+                    DepartmentCity = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cars_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "Departments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_DepartmentId",
+                table: "Cars",
+                column: "DepartmentId");
         }
 
         /// <inheritdoc />
@@ -85,10 +100,10 @@ namespace RentaCarKDS.Migrations
                 name: "Cars");
 
             migrationBuilder.DropTable(
-                name: "TableCategorys");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Departments");
         }
     }
 }
