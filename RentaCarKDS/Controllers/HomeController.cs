@@ -44,17 +44,9 @@ namespace RentaCarKDS.Controllers
                 Car = car,
                 TableCategory = categories
             };
-            using (var db = new DatabaseContext())
-            {
-                for (int c = 0; c < car.Count; c++)
-                {
-                    db.Cars.Add(car[c]);
-
-                }
-                db.SaveChanges();
-
-            }
             return View(carViewModel);
+
         }
+
     }
 }

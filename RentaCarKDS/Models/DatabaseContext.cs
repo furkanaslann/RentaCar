@@ -11,6 +11,11 @@ namespace RentaCarKDS.Models
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer("Data Source=RentaCarDb.db");
+        }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<TableCategory> TableCategories { get; set; }

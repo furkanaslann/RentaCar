@@ -113,6 +113,7 @@
                 <div class="col-md-12">
                     <div class="au-breadcrumb-content">
                         <div class="au-breadcrumb-left">
+
                             <span class="au-breadcrumb-span">You are here:</span>
                             <ul class="list-unstyled list-inline au-breadcrumb__list">
                                 <li class="list-inline-item active">
@@ -123,11 +124,12 @@
                                 </li>
                                 <li class="list-inline-item active">
                                     <a asp-controller="Admin" asp-action="Details">Detaylar</a>
-                            </ul>
+                                <li class="has-sub">
+                                <a asp-controller="Admin" asp-action="Addcar">Araba Ekle</a>
+                            </li>
+                            </ul
                         </div>
-                        <button class="au-btn au-btn-icon au-btn--green" href="#">
-                            <i class="zmdi zmdi-plus"></i>Araba Ekle
-                        </button>
+
                     </div>
                 </div>
             </div>
@@ -137,7 +139,7 @@
 <aside class="menu-sidebar2 js-right-sidebar d-block d-lg-none">
     <div class="logo">
         <a href="#">
-            <img src="images/icon/logo-white.png" alt="Cool Admin" />
+            <img src="~/CoolAdmin-master/images/icon/logo-white.png" alt="Cool Admin" />
         </a>
     </div>
     <div class="menu-sidebar2__content js-scrollbar2">
