@@ -1,0 +1,27 @@
+﻿@model Car
+@{
+    ViewData["Title"] = "Details";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@foreach(var infos in ) // Car verilerini çekmeye çalış.
+{
+    <div class="main-content">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row no-gutters">
+                    <div class="col-md-3">
+                        <img src="~/CoolAdmin-master/images/Cars/@infos.Photo" class="card-img">
+                    </div>
+                    <div class="col-md-9">
+
+                        <h5 class="card-title">@infos.Brand</h5>
+                        <p class="card-text">@infos.Model</p>
+                        <button class="btn btn-primary" asp-controller="Admin" asp-action="View">Detaylar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RentaCarKDS.Models;
+using System.Drawing.Imaging;
 
 namespace RentaCarKDS.Controllers
 {
@@ -16,20 +17,20 @@ namespace RentaCarKDS.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Addcar(IFormCollection form)
+        public IActionResult Addcar(Car car)
         {
-            DatabaseContext db = new DatabaseContext();
-            Car car = new Car();
-            car.StartDate = form["StartDate"];
-            car.FinishDate = form["FinishDate"];
-            car.ChassisNo = form["ChassisNo"];
-            car.Plate = form["Plate"];
-            car.Type = form["Type"];
-            //car.DatePrice = form["DatePrice"];
-            car.DepartmentCity = form["DepartmentCity"];
-            db.Cars.AddRange(car);
-            db.SaveChanges();
+            Console.WriteLine(car.StartDate);
+            Console.WriteLine(car.FinishDate);
+            Console.WriteLine(car.ChassisNo);
+            Console.WriteLine(car.Plate);
+            Console.WriteLine(car.Type);
+            Console.WriteLine(car.DatePrice);
+            Console.WriteLine(car.DepartmentCity);
             return View();
+        }
+        public IActionResult Detailscar(Car car) 
+        {
+            return View(car);
         }
     }
 }

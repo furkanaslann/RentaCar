@@ -14,11 +14,14 @@ namespace RentaCarKDS.Models
         public string ChassisNo { get; set; }
         [MaxLength(10)]
         public string Plate { get; set; }
-
         public string Type { get; set; }
         public double DatePrice { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public string Photo { get; set; }
+        public int Year { get; set; }
+
         public Department Department { get; set; } // navigation property
         public string DepartmentCity { get; set; }
-
     }
 }
