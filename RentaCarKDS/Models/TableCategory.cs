@@ -7,7 +7,6 @@ namespace RentaCarKDS.Models
     public class TableCategory
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Computed değiştirilebilir.
         public int Id { get; set; }
 
         public string Name { get; set; }

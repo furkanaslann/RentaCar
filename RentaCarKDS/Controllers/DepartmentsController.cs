@@ -5,92 +5,89 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using RentaCarKDS.Models;
 
 namespace RentacarKDS.Controllers
 {
-    public class CarsController : Controller
+    public class DepartmentsController : Controller
     {
         private readonly DatabaseContext _context;
 
-        public CarsController(DatabaseContext context)
+        public DepartmentsController(DatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: Cars
+        // GET: Departments
         public async Task<IActionResult> Index()
         {
-            var databasecontext = _context.Cars.Include(c => c.Department);
-            return View(await databasecontext.ToListAsync());
+              return _context.Departments != null ? 
+                          View(await _context.Departments.ToListAsync()) :
+                          Problem("Entity set 'Arabalar.Departments'  is null.");
         }
 
-        // GET: Cars/Details/5
+        // GET: Departments/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Cars == null)
+            if (id == null || _context.Departments == null)
             {
                 return NotFound();
             }
 
-            var car = await _context.Cars
-                .Include(c => c.Department)
+            var department = await _context.Departments
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (car == null)
+            if (department == null)
             {
                 return NotFound();
             }
 
-            return View(car);
+            return View(department);
         }
 
-        // GET: Cars/Create
+        // GET: Departments/Create
         public IActionResult Create()
         {
-            ViewData["departmentId"] = new SelectList(_context.Departments, "Id", "City");
             return View();
         }
 
-        // POST: Cars/Create
+        // POST: Departments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StartDate,FinishDate,ChassisNo,Plate,Type,DatePrice,Brand,Model,Photo,Year,departmentId")] Car car)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,City,Region")] Department department)
         {
-            ViewData["departmentId"] = new SelectList(_context.Departments, "Id", "City", car.DepartmentCity);
-            _context.Add(car);
+            
+                _context.Add(department);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             
         }
 
-        // GET: Cars/Edit/5
+        // GET: Departments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Cars == null)
+            if (id == null || _context.Departments == null)
             {
                 return NotFound();
             }
 
-            var car = await _context.Cars.FindAsync(id);
-            if (car == null)
+            var department = await _context.Departments.FindAsync(id);
+            if (department == null)
             {
                 return NotFound();
             }
-            ViewData["departmentId"] = new SelectList(_context.Departments, "Id", "Name", car.Department.Id);
-            return View(car);
+            return View(department);
         }
 
-        // POST: Cars/Edit/5
+        // POST: Departments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,FinishDate,ChassisNo,Plate,Type,DatePrice,Brand,Model,Photo,Year,departmentId")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,City,Region")] Department department)
         {
-            if (id != car.Id)
+            if (id != department.Id)
             {
                 return NotFound();
             }
@@ -99,12 +96,12 @@ namespace RentacarKDS.Controllers
             {
                 try
                 {
-                    _context.Update(car);
+                    _context.Update(department);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CarExists(car.Id))
+                    if (!DepartmentExists(department.Id))
                     {
                         return NotFound();
                     }
@@ -115,51 +112,49 @@ namespace RentacarKDS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["departmentId"] = new SelectList(_context.Departments, "Id", "Name", car.departmentId);
-            return View(car);
+            return View(department);
         }
 
-        // GET: Cars/Delete/5
+        // GET: Departments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Cars == null)
+            if (id == null || _context.Departments == null)
             {
                 return NotFound();
             }
 
-            var car = await _context.Cars
-                .Include(c => c.Department)
+            var department = await _context.Departments
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (car == null)
+            if (department == null)
             {
                 return NotFound();
             }
 
-            return View(car);
+            return View(department);
         }
 
-        // POST: Cars/Delete/5
+        // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Cars == null)
+            if (_context.Departments == null)
             {
-                return Problem("Entity set 'Arabalar.Cars'  is null.");
+                return Problem("Entity set 'Arabalar.Departments'  is null.");
             }
-            var car = await _context.Cars.FindAsync(id);
-            if (car != null)
+            var department = await _context.Departments.FindAsync(id);
+            if (department != null)
             {
-                _context.Cars.Remove(car);
+                _context.Departments.Remove(department);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CarExists(int id)
+        private bool DepartmentExists(int id)
         {
-          return (_context.Cars?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Departments?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

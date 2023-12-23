@@ -25,7 +25,6 @@ namespace RentaCarKDS.Controllers
             Console.WriteLine(car.Plate);
             Console.WriteLine(car.Type);
             Console.WriteLine(car.DatePrice);
-            Console.WriteLine(car.DepartmentCity);
             return View();
         }
         public IActionResult Detailscar(Car car) 
