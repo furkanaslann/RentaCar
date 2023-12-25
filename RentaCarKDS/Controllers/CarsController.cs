@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using RentaCarKDS.Models;
 
-namespace RentacarKDS.Controllers
+namespace RentaCarKDS.Controllers
 {
     public class CarsController : Controller
     {
@@ -22,8 +22,8 @@ namespace RentacarKDS.Controllers
         // GET: Cars
         public async Task<IActionResult> Index()
         {
-            var databasecontext = _context.Cars.Include(c => c.Department);
-            return View(await databasecontext.ToListAsync());
+            var arabalar = _context.Cars.Include(c => c.Department);
+            return View(await arabalar.ToListAsync());
         }
 
         // GET: Cars/Details/5
@@ -59,11 +59,11 @@ namespace RentacarKDS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,StartDate,FinishDate,ChassisNo,Plate,Type,DatePrice,Brand,Model,Photo,Year,departmentId")] Car car)
         {
-            ViewData["departmentId"] = new SelectList(_context.Departments, "Id", "City", car.DepartmentCity);
+            ViewData["departmentId"] = new SelectList(_context.Departments, "Id", "City", car.Department.Id);
             _context.Add(car);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: Cars/Edit/5
@@ -115,7 +115,7 @@ namespace RentacarKDS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["departmentId"] = new SelectList(_context.Departments, "Id", "Name", car.departmentId);
+            ViewData["departmentId"] = new SelectList(_context.Departments, "Id", "Name", car.Department.Id);
             return View(car);
         }
 
@@ -152,14 +152,14 @@ namespace RentacarKDS.Controllers
             {
                 _context.Cars.Remove(car);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CarExists(int id)
         {
-          return (_context.Cars?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Cars?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

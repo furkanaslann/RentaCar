@@ -21,6 +21,7 @@ namespace RentaCarKDS.Data
                 new TableCategory {Id=7, Name="Price", Description = "empty"},
                 new TableCategory {Id=8, Name="City", Description = "empty"},
                 new TableCategory {Id=9, Name="Brand", Description = "empty"},
+                new TableCategory {Id=10, Name="Model", Description = "empty"},
             };
         }
         public static List<TableCategory> TableCategories 

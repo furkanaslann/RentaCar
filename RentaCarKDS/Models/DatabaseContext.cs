@@ -41,9 +41,6 @@ namespace RentaCarKDS.Models
                 .IsRequired();
 
             modelBuilder.Entity<Department>()
-                .Property(n => n.Name)
-                .IsRequired();
-            modelBuilder.Entity<Department>()
                 .Property(ct => ct.City)
                 .IsRequired();
         }

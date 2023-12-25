@@ -21,9 +21,9 @@ namespace RentacarKDS.Controllers
         // GET: Departments
         public async Task<IActionResult> Index()
         {
-              return _context.Departments != null ? 
-                          View(await _context.Departments.ToListAsync()) :
-                          Problem("Entity set 'Arabalar.Departments'  is null.");
+            return _context.Departments != null ?
+                        View(await _context.Departments.ToListAsync()) :
+                        Problem("Entity set 'Arabalar.Departments'  is null.");
         }
 
         // GET: Departments/Details/5
@@ -57,11 +57,11 @@ namespace RentacarKDS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,City,Region")] Department department)
         {
-            
-                _context.Add(department);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            
+
+            _context.Add(department);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: Departments/Edit/5
@@ -147,14 +147,14 @@ namespace RentacarKDS.Controllers
             {
                 _context.Departments.Remove(department);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DepartmentExists(int id)
         {
-          return (_context.Departments?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Departments?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
